@@ -362,9 +362,9 @@ module ActsAsTaggableOn::Taggable
       else
         old = tag_list_on(context)
         if self.class.preserve_tag_order
-          @changed_attributes[attrib] = old if old.to_s != value.to_s
+          @changed_attributes[attrib] = old if old.to_s != value.to_s rescue nil
         else
-          @changed_attributes[attrib] = old.to_s if old.sort != ActsAsTaggableOn.default_parser.new(value).parse.sort
+          @changed_attributes[attrib] = old.to_s if old.sort != ActsAsTaggableOn.default_parser.new(value).parse.sort rescue nil
         end
       end
     end
